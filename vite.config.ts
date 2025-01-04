@@ -3,6 +3,25 @@ import autoprefixer from "autoprefixer";
 import tailwindcss from "tailwindcss";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
+import { defaultClientConditions, defaultServerConditions } from "vite";
+
+const prismaFixPlugin = {
+  name: "prisma-fix",
+  enforce: "post",
+  config() {
+    return {
+      resolve: {
+        conditions: [...defaultClientConditions],
+      },
+      ssr: {
+        resolve: {
+          conditions: [...defaultServerConditions],
+          externalConditions: [...defaultServerConditions],
+        },
+      },
+    };
+  },
+};
 
 export default defineConfig(({ isSsrBuild, command }) => ({
   build: {
@@ -20,5 +39,5 @@ export default defineConfig(({ isSsrBuild, command }) => ({
   ssr: {
     noExternal: command === "build" ? true : undefined,
   },
-  plugins: [reactRouter(), tsconfigPaths()],
+  plugins: [prismaFixPlugin,reactRouter(), tsconfigPaths()],
 }));
