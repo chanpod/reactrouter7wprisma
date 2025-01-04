@@ -1,4 +1,4 @@
 node_modules
 .env
 .react-router
-build
+build.vercel
