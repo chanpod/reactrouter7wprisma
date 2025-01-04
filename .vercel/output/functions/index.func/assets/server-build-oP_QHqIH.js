@@ -1,9 +1,10 @@
-import { r as reactExports, d as development, a as dist } from "./app-BQPVLIAH.js";
+import { r as reactExports, d as development, a as dist } from "./app-BIlkiMGN.js";
 import { PassThrough } from "node:stream";
 import require$$0 from "util";
 import require$$0$1 from "crypto";
 import require$$2 from "async_hooks";
 import require$$1 from "stream";
+import require$$0$2 from ".prisma/client/default";
 import "fs";
 import "path";
 import "tty";
@@ -22615,6 +22616,9 @@ const resources = [
     )
   }
 ];
+var _default = {
+  ...require$$0$2
+};
 function meta({}) {
   return [{
     title: "New React Router App"
@@ -22623,18 +22627,28 @@ function meta({}) {
     content: "Welcome to React Router!"
   }];
 }
-function loader({
+async function loader({
   context
 }) {
+  console.log("We should be seeing something from server logs?!?!?");
+  const prisma = new _default.PrismaClient();
+  const users = await prisma.user.findFirst();
+  console.log(users);
   return {
-    message: context.VALUE_FROM_VERCEL
+    message: context.VALUE_FROM_VERCEL,
+    users
   };
 }
 const home = withComponentProps(function Home({
   loaderData
 }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Welcome, {
-    message: loaderData.message
+  var _a;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, {
+    children: [/* @__PURE__ */ jsxRuntimeExports.jsx(Welcome, {
+      message: loaderData.message
+    }), "asdfasdf", /* @__PURE__ */ jsxRuntimeExports.jsx("div", {
+      children: (_a = loaderData.users) == null ? void 0 : _a.name
+    })]
   });
 });
 const route1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
@@ -22643,7 +22657,7 @@ const route1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProper
   loader,
   meta
 }, Symbol.toStringTag, { value: "Module" }));
-const serverManifest = { "entry": { "module": "/assets/entry.client-u-M4TmH-.js", "imports": ["/assets/chunk-K6AXKMTT-DycbfBQN.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": true, "module": "/assets/root-CzEkcZd-.js", "imports": ["/assets/chunk-K6AXKMTT-DycbfBQN.js", "/assets/with-props-BJdOiEPt.js"], "css": [] }, "routes/home": { "id": "routes/home", "parentId": "root", "path": void 0, "index": true, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/home-B89UzOfG.js", "imports": ["/assets/with-props-BJdOiEPt.js", "/assets/chunk-K6AXKMTT-DycbfBQN.js"], "css": [] } }, "url": "/assets/manifest-cbe2f6a0.js", "version": "cbe2f6a0" };
+const serverManifest = { "entry": { "module": "/assets/entry.client-u-M4TmH-.js", "imports": ["/assets/chunk-K6AXKMTT-DycbfBQN.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": true, "module": "/assets/root-CzEkcZd-.js", "imports": ["/assets/chunk-K6AXKMTT-DycbfBQN.js", "/assets/with-props-BJdOiEPt.js"], "css": [] }, "routes/home": { "id": "routes/home", "parentId": "root", "path": void 0, "index": true, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/home-tKh7IKLU.js", "imports": ["/assets/with-props-BJdOiEPt.js", "/assets/chunk-K6AXKMTT-DycbfBQN.js"], "css": [] } }, "url": "/assets/manifest-e8d63c26.js", "version": "e8d63c26" };
 const assetsBuildDirectory = "build/client";
 const basename = "/";
 const future = { "unstable_optimizeDeps": false };
