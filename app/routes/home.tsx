@@ -12,6 +12,7 @@ export function meta({}: Route.MetaArgs) {
 export async function loader({ context }: Route.LoaderArgs) {
   const prisma = new PrismaClient();
   const users = await prisma.user.findFirst();
+  console.log(users);
   return { message: context.VALUE_FROM_VERCEL, users };
 }
 
