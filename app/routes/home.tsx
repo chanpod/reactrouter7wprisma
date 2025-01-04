@@ -20,7 +20,7 @@ export async function loader({ context }: Route.LoaderArgs) {
 export default function Home({ loaderData }: Route.ComponentProps) {
   return <>
   <Welcome message={loaderData.message} />
-  asdfasdf
+  asdfasdf 2342342432
   <div>{loaderData.users?.name}</div>
   </>;
 }
