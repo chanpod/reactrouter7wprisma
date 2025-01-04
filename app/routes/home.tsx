@@ -13,6 +13,7 @@ export async function loader({ context }: Route.LoaderArgs) {
   const prisma = new PrismaClient();
   const users = await prisma.user.findFirst();
   console.log(users);
+  console.log("We should be seeing something from server logs?!?!?")
   return { message: context.VALUE_FROM_VERCEL, users };
 }
 
