@@ -1,13 +1,13 @@
 import { reactRouter } from "@react-router/dev/vite";
 import autoprefixer from "autoprefixer";
 import tailwindcss from "tailwindcss";
-import { defineConfig } from "vite";
+import type { Plugin } from "vite";
+import { defaultClientConditions, defaultServerConditions, defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
-import { defaultClientConditions, defaultServerConditions } from "vite";
 
-const prismaFixPlugin = {
-  name: "prisma-fix",
-  enforce: "post",
+const prismaFixPlugin: Plugin = {
+  name: 'prisma-fix',
+  enforce: 'post',
   config() {
     return {
       resolve: {
@@ -16,11 +16,11 @@ const prismaFixPlugin = {
       ssr: {
         resolve: {
           conditions: [...defaultServerConditions],
-          externalConditions: [...defaultServerConditions],
-        },
-      },
-    };
-  },
+          externalConditions: [...defaultServerConditions]
+        }
+      }
+    }
+  }
 };
 
 export default defineConfig(({ isSsrBuild, command }) => ({
@@ -28,6 +28,7 @@ export default defineConfig(({ isSsrBuild, command }) => ({
     rollupOptions: isSsrBuild
       ? {
           input: "./server/app.ts",
+          external: ['@prisma/client-generated']
         }
       : undefined,
   },
@@ -38,6 +39,7 @@ export default defineConfig(({ isSsrBuild, command }) => ({
   },
   ssr: {
     noExternal: command === "build" ? true : undefined,
+    external: ['@prisma/client-generated']
   },
-  plugins: [prismaFixPlugin,reactRouter(), tsconfigPaths()],
+  plugins: [prismaFixPlugin, reactRouter(), tsconfigPaths()],
 }));
