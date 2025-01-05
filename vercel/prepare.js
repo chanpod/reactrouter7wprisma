@@ -9,7 +9,7 @@ await fsp.cp("build/server/", ".vercel/output/functions/index.func", {
   recursive: true,
 });
 await fsp.cp(
-  "node_modules/@prisma/client-generated",
-  ".vercel/output/functions/index.func/node_modules/@prisma/client-generated",
+  "node_modules/@prisma/client",
+  ".vercel/output/functions/index.func/node_modules/@prisma/client",
   { recursive: true }
 );
